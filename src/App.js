@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
 
-import { TaskList } from "./components/TaskList";
+import { Main } from "./components/Main";
 
 export const App = () => {
   return (
     <div>
-      <TaskList />
+      <Main />
     </div>
   );
 };
