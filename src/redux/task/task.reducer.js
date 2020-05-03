@@ -12,6 +12,11 @@ export const taskReducer = (state = INITIAL_STATE, action) => {
         ...state,
         todos: addTaskToArr(state.todos, action.payload),
       };
+    case TaskActionTypes.DELETE_TASK:
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo !== action.payload),
+      };
     default:
       return state;
   }
