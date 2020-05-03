@@ -18,7 +18,9 @@ export const Main = () => {
     event.preventDefault();
     setTask("");
     // setTodos([...todos, task]);
-    dispatch(addTask(task));
+    dispatch(
+      addTask({ text: task, id: new Date().valueOf(), completed: false })
+    );
   };
 
   return (

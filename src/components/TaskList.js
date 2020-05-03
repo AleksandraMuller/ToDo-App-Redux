@@ -29,7 +29,9 @@ export const TaskList = () => {
     <div>
       {selectors.todos.map((todo, index) => (
         <>
-          <li key={index}>{todo}</li>
+          <li key={index}>
+            {todo.id}|| {todo.text}
+          </li>
           <Button
             label="Delete"
             handleClick={() => handleDelete(index)}
