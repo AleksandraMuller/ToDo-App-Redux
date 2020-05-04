@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Input } from "./Input";
 import { TaskList } from "./TaskList";
+import { Counter } from "./Counter";
 import { addTask } from "../redux/task/task.actions";
 
 export const Main = () => {
-  // const [todos, setTodos] = useState([]);
   const [task, setTask] = useState();
 
   const dispatch = useDispatch();
@@ -17,7 +17,6 @@ export const Main = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setTask("");
-    // setTodos([...todos, task]);
     dispatch(
       addTask({ text: task, id: new Date().valueOf(), completed: false })
     );
@@ -26,6 +25,7 @@ export const Main = () => {
   return (
     <div>
       <h1>My ToDO - App</h1>
+      <Counter />
       <Input
         handleChange={handleChange}
         value={task}

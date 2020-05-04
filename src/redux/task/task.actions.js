@@ -9,3 +9,7 @@ export const deleteTask = (task) => ({
   type: TaskActionTypes.DELETE_TASK,
   payload: task,
 });
+
+export const deleteAll = () => ({
+  type: TaskActionTypes.DELETE_ALL,
+});
