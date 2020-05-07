@@ -1,6 +1,10 @@
 import React from "react";
 
-export const Input = ({ handleChange, handleSubmit, ...otherProps }) => {
+export const Input = ({ handleSubmit, setVar, ...otherProps }) => {
+  const handleChange = (event) => {
+    setVar(event.target.value);
+  };
+
   return (
     <>
       <form onSubmit={handleSubmit}>

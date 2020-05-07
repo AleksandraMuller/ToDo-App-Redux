@@ -10,15 +10,16 @@ export const Main = () => {
 
   const dispatch = useDispatch();
 
-  const handleChange = (event) => {
-    setTask(event.target.value);
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
     setTask("");
     dispatch(
-      addTask({ text: task, id: new Date().valueOf(), completed: false })
+      addTask({
+        text: task,
+        id: new Date().valueOf(),
+        completed: false,
+        edit: false,
+      })
     );
   };
 
@@ -26,11 +27,7 @@ export const Main = () => {
     <div>
       <h1>My ToDO - App</h1>
       <Counter />
-      <Input
-        handleChange={handleChange}
-        value={task}
-        handleSubmit={handleSubmit}
-      />
+      <Input setVar={setTask} value={task} handleSubmit={handleSubmit} />
       <TaskList />
     </div>
   );

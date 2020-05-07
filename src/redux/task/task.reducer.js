@@ -1,5 +1,9 @@
 import { TaskActionTypes } from "./task.types";
-import { addTaskToArr } from "./task.utils";
+import {
+  addTaskToArr,
+  editTaskInArr,
+  addEditedTaskIntoArr,
+} from "./task.utils";
 
 const INITIAL_STATE = {
   todos: [],
@@ -24,6 +28,16 @@ export const taskReducer = (state = INITIAL_STATE, action) => {
       return {
         todos: (state.todos = []),
         total: (state.total = 0),
+      };
+    case TaskActionTypes.EDIT_TASK:
+      return {
+        ...state,
+        todos: editTaskInArr(state.todos, action.payload),
+      };
+    case TaskActionTypes.ADD_EDITED_TASK:
+      return {
+        ...state,
+        todos: addEditedTaskIntoArr(state.todos, action.payload),
       };
     default:
       return state;

@@ -13,3 +13,13 @@ export const deleteTask = (task) => ({
 export const deleteAll = () => ({
   type: TaskActionTypes.DELETE_ALL,
 });
+
+export const editTask = (task) => ({
+  type: TaskActionTypes.EDIT_TASK,
+  payload: task,
+});
+
+export const addEditedTask = (obj) => ({
+  type: TaskActionTypes.ADD_EDITED_TASK,
+  payload: obj,
+});
