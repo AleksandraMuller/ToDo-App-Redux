@@ -6,7 +6,10 @@ import {
   deleteTask,
   editTask,
   addEditedTask,
+  toggleCompletedTask,
 } from "../redux/task/task.actions";
+import { ReactComponent as Checked } from "../assets/checked_square.svg";
+import { ReactComponent as EmptySquare } from "../assets/empty_sqare.svg";
 
 import { Button } from "./Button";
 import { Input } from "./Input";
@@ -22,8 +25,7 @@ export const TaskList = () => {
     })
   );
 
-  console.log(selectors.taskfile);
-  console.log(task);
+  // console.log(selectors.taskfile);
 
   const handleDelete = (index) => {
     const task = selectors.todos[index];
@@ -32,8 +34,6 @@ export const TaskList = () => {
 
   const handleEdit = (index) => {
     const task = selectors.todos[index];
-    console.log(task);
-    console.log(selectors.edit);
     dispatch(editTask(task));
   };
 
@@ -41,27 +41,32 @@ export const TaskList = () => {
     const fullTodo = selectors.todos[index];
     event.preventDefault();
     dispatch(addEditedTask({ fullTodo, task }));
-
     setTask("");
+  };
+
+  const handleCompleted = (event, index) => {
+    const task = selectors.todos[index];
+    event.preventDefault();
+    dispatch(toggleCompletedTask(task));
   };
 
   return (
     <div>
       {selectors.todos.map((todo, index) => (
         <>
-          {todo.edit === false && (
-            <li key={index}>
-              {todo.id}|| {todo.text}
-            </li>
-          )}
+          {todo.edit === false && <li key={todo.id}>{todo.text}</li>}
 
-          {todo.id === selectors.todos[index].id && todo.edit === true && (
+          {todo.edit === true && (
             <Input
-              // placeholder={todo.text}
               value={task}
               setVar={setTask}
               handleSubmit={(event) => handleSubmit(event, index)}
             ></Input>
+          )}
+          {todo.completed === false ? (
+            <EmptySquare onClick={(event) => handleCompleted(event, index)} />
+          ) : (
+            <Checked onClick={(event) => handleCompleted(event, index)} />
           )}
           {todo.edit === false && (
             <Button label="Edit" handleClick={() => handleEdit(index)}></Button>

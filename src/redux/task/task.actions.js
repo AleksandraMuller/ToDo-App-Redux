@@ -23,3 +23,8 @@ export const addEditedTask = (obj) => ({
   type: TaskActionTypes.ADD_EDITED_TASK,
   payload: obj,
 });
+
+export const toggleCompletedTask = (task) => ({
+  type: TaskActionTypes.TOGGLE_COMPLETED,
+  payload: task,
+});

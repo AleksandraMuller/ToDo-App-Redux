@@ -19,3 +19,11 @@ export const addEditedTaskIntoArr = (todos, obj) => {
 
   return [...todos];
 };
+
+export const toggleTask = (todos, task) => {
+  const foundTask = todos.find((todo) => todo === task);
+  if (foundTask) {
+    task.completed = !task.completed;
+    return [...todos];
+  }
+};
