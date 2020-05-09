@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectTodos, selectTaskFile } from "../redux/task/task.selector";
+import { selectTodos } from "../redux/task/task.selector";
+import { selectItem } from "../redux/filter/filter.selector";
+
 import {
   deleteTask,
   editTask,
   addEditedTask,
   toggleCompletedTask,
 } from "../redux/task/task.actions";
+
 import { ReactComponent as Checked } from "../assets/checked_square.svg";
 import { ReactComponent as EmptySquare } from "../assets/empty_sqare.svg";
 
@@ -20,12 +23,20 @@ export const TaskList = () => {
 
   const selectors = useSelector(
     createStructuredSelector({
+      item: selectItem,
       todos: selectTodos,
-      taskfile: selectTaskFile,
     })
   );
 
-  // console.log(selectors.taskfile);
+  const filtered = selectors.todos.filter((todo) => {
+    if (selectors.item === "SHOW_COMPLETED") {
+      return todo.completed;
+    } else if (selectors.item === "SHOW_ONGOING") {
+      return !todo.completed;
+    } else {
+      return true;
+    }
+  });
 
   const handleDelete = (index) => {
     const task = selectors.todos[index];
@@ -52,7 +63,7 @@ export const TaskList = () => {
 
   return (
     <div>
-      {selectors.todos.map((todo, index) => (
+      {filtered.map((todo, index) => (
         <>
           {todo.edit === false && <li key={todo.id}>{todo.text}</li>}
 

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Input } from "./Input";
 import { TaskList } from "./TaskList";
 import { Counter } from "./Counter";
+import { FilterButtons } from "./FilterButtons";
 import { addTask } from "../redux/task/task.actions";
 
 export const Main = () => {
@@ -29,6 +30,7 @@ export const Main = () => {
       <Counter />
       <Input setVar={setTask} value={task} handleSubmit={handleSubmit} />
       <TaskList />
+      <FilterButtons />
     </div>
   );
 };
