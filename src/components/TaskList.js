@@ -75,11 +75,11 @@ export const TaskList = () => {
             {todo.edit === false && <List key={todo.id}>{todo.text}</List>}
 
             {todo.edit === true && (
-              <Input
+              <StyledInput
                 value={task}
                 setVar={setTask}
                 handleSubmit={(event) => handleSubmit(event, index)}
-              ></Input>
+              ></StyledInput>
             )}
           </TodoContainer>
           <ButtonContainer>
@@ -150,4 +150,9 @@ const DeleteButton = styled(Button)`
     color: #e86267;
     background-color: #173847;
   }
+`;
+
+const StyledInput = styled(Input)`
+  padding: 0.5rem;
+  font-family: "Fjalla One", sans-serif;
 `;
