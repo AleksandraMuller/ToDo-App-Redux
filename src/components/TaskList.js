@@ -16,6 +16,7 @@ import { ReactComponent as EmptySquare } from "../assets/empty_sqare.svg";
 
 import { Button } from "./Button";
 import { Input } from "./Input";
+import styled from "styled-components";
 
 export const TaskList = () => {
   const [task, setTask] = useState();
@@ -64,30 +65,89 @@ export const TaskList = () => {
   return (
     <div>
       {filtered.map((todo, index) => (
-        <>
-          {todo.edit === false && <li key={todo.id}>{todo.text}</li>}
+        <SingleTaskContainer>
+          <TodoContainer>
+            {todo.completed === false ? (
+              <IconEmpty onClick={(event) => handleCompleted(event, index)} />
+            ) : (
+              <IconChecked onClick={(event) => handleCompleted(event, index)} />
+            )}
+            {todo.edit === false && <List key={todo.id}>{todo.text}</List>}
 
-          {todo.edit === true && (
-            <Input
-              value={task}
-              setVar={setTask}
-              handleSubmit={(event) => handleSubmit(event, index)}
-            ></Input>
-          )}
-          {todo.completed === false ? (
-            <EmptySquare onClick={(event) => handleCompleted(event, index)} />
-          ) : (
-            <Checked onClick={(event) => handleCompleted(event, index)} />
-          )}
-          {todo.edit === false && (
-            <Button label="Edit" handleClick={() => handleEdit(index)}></Button>
-          )}
-          <Button
-            label="Delete"
-            handleClick={() => handleDelete(index)}
-          ></Button>
-        </>
+            {todo.edit === true && (
+              <Input
+                value={task}
+                setVar={setTask}
+                handleSubmit={(event) => handleSubmit(event, index)}
+              ></Input>
+            )}
+          </TodoContainer>
+          <ButtonContainer>
+            {todo.edit === false && (
+              <EditButton
+                label="Edit"
+                handleClick={() => handleEdit(index)}
+              ></EditButton>
+            )}
+            <DeleteButton
+              label="Delete"
+              handleClick={() => handleDelete(index)}
+            ></DeleteButton>
+          </ButtonContainer>
+        </SingleTaskContainer>
       ))}
     </div>
   );
 };
+
+const SingleTaskContainer = styled.div`
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const IconEmpty = styled(EmptySquare)`
+  width: 35px;
+  height: 35px;
+  margin-right: 1rem;
+  cursor: pointer;
+`;
+const IconChecked = styled(Checked)`
+  width: 35px;
+  height: 35px;
+  margin-right: 1rem;
+  cursor: pointer;
+`;
+
+const List = styled.li`
+  list-style: none;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const TodoContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const EditButton = styled(Button)`
+  background-color: #f2bc1c;
+  color: #173847;
+  :hover {
+    color: #f2bc1c;
+    background-color: #173847;
+  }
+`;
+
+const DeleteButton = styled(Button)`
+  background-color: #e86267;
+  color: #173847;
+  margin-left: 1rem;
+  :hover {
+    color: #e86267;
+    background-color: #173847;
+  }
+`;

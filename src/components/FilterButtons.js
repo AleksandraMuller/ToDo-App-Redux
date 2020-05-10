@@ -6,7 +6,10 @@ import {
   showCompleted,
   showOngoing,
 } from "../redux/filter/filter.actions";
-import { selectTodos } from "../redux/task/task.selector";
+
+// import { Button } from "./Button";
+
+import styled from "styled-components";
 
 export const FilterButtons = () => {
   const dispatch = useDispatch();
@@ -26,10 +29,31 @@ export const FilterButtons = () => {
     dispatch(showOngoing("SHOW_ONGOING"));
   };
   return (
-    <div>
-      <button onClick={handleAll}>SHOW ALL</button>
-      <button onClick={handleCompleted}>SHOW COMPLETED</button>
-      <button onClick={handleOngoing}>SHOW ONGOING</button>
-    </div>
+    <Container>
+      <Button onClick={handleAll}>SHOW ALL</Button>
+      <Button onClick={handleCompleted}>SHOW COMPLETED</Button>
+      <Button onClick={handleOngoing}>SHOW ONGOING</Button>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Button = styled.button`
+  cursor: pointer;
+  font-family: "Fjalla One", sans-serif;
+  background-color: #f2bc1c;
+  color: #173847;
+  padding: 0.5rem;
+  border: none;
+  @media (min-width: 900px) {
+    padding: 1rem;
+  }
+  :hover {
+    color: #f2bc1c;
+    background-color: #173847;
+  }
+`;

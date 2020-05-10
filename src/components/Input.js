@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 export const Input = ({ handleSubmit, setVar, ...otherProps }) => {
   const handleChange = (event) => {
@@ -8,8 +9,12 @@ export const Input = ({ handleSubmit, setVar, ...otherProps }) => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input onChange={handleChange} {...otherProps} />
+        <InputField onChange={handleChange} {...otherProps} />
       </form>
     </>
   );
 };
+
+const InputField = styled.input`
+  margin: 1.5rem 0;
+`;
