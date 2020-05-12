@@ -72,8 +72,12 @@ export const TaskList = () => {
             ) : (
               <IconChecked onClick={(event) => handleCompleted(event, index)} />
             )}
-            {todo.edit === false && <List key={todo.id}>{todo.text}</List>}
-
+            {todo.edit === false && todo.completed === false && (
+              <List key={todo.id}>{todo.text}</List>
+            )}
+            {todo.edit === false && todo.completed === true && (
+              <ListCompleted key={todo.id}>{todo.text}</ListCompleted>
+            )}
             {todo.edit === true && (
               <StyledInput
                 value={task}
@@ -122,6 +126,11 @@ const IconChecked = styled(Checked)`
 
 const List = styled.li`
   list-style: none;
+`;
+
+const ListCompleted = styled(List)`
+  text-decoration: line-through;
+  color: #23566d;
 `;
 
 const ButtonContainer = styled.div`
