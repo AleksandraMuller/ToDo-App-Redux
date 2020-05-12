@@ -27,3 +27,11 @@ export const toggleTask = (todos, task) => {
     return [...todos];
   }
 };
+
+export const toggleTotal = (total, task) => {
+  if (task.completed === false) {
+    return total + 1;
+  } else if (task.completed === true) {
+    return total - 1;
+  }
+};

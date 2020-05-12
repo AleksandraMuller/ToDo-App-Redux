@@ -4,6 +4,7 @@ import {
   editTaskInArr,
   addEditedTaskIntoArr,
   toggleTask,
+  toggleTotal,
 } from "./task.utils";
 
 const INITIAL_STATE = {
@@ -44,6 +45,7 @@ export const taskReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         todos: toggleTask(state.todos, action.payload),
+        total: toggleTotal(state.total, action.payload),
       };
     default:
       return state;
